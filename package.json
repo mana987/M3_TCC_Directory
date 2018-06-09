@@ -1,7 +1,7 @@
 {
-  "name": "M3-TCC-DIRECTORY",
-  "version": "0.0.1",
-  "author": "Ionic Framework",
+  "name": "tccdirectory",
+  "version": "1.0.0",
+  "author": "M3",
   "homepage": "http://ionicframework.com/",
   "private": true,
   "scripts": {

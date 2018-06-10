@@ -24,4 +24,6 @@ export class WelcomePage {
     console.log('ionViewDidLoad WelcomePage');
   }
 
+  
+
 }

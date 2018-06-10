@@ -1,7 +1,9 @@
 import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
+import { HttpModule } from '@angular/http';
 import { MyApp } from './app.component';
+import { oneClickApiService } from '../services/oneClickApi.service'
 
 // Pages
 
@@ -31,6 +33,7 @@ import { CallNumber } from '@ionic-native/call-number';
     WelcomePage,
   ],
   imports: [
+    HttpModule,
     BrowserModule,
     IonicModule.forRoot(MyApp)
   ],
@@ -44,6 +47,7 @@ import { CallNumber } from '@ionic-native/call-number';
     WelcomePage,
   ],
   providers: [
+    oneClickApiService,
     StatusBar,
     SplashScreen,
     SQLite,

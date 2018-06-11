@@ -15,11 +15,13 @@ import { OneClickApiBusinesses } from '../pages/models/oneClickApi-businesses.mo
 export class oneClickApiService {
 
     private baseUrl: string = 'http://tccdirectory.1click.pf/api/';
-    private id: string = '{id}';
+    private id = 0;
 
     constructor(private http: Http) { 
 
     }
+
+// Get all Skills
 
     public getSkills() : any {
         const url = `${this.baseUrl}skills`;
@@ -27,17 +29,23 @@ export class oneClickApiService {
         return this.http.get(url)
             .toPromise()
             .then(response => response.json() as OneClickApiSkills)
-            .catch(error => console.log('Une erreur est survenue ' + error))
+            .catch(error => console.log('Une erreur est survenue getSkill ' + error))
     }  
 
+    // Get business ID
+
     public getGlobalBusiness (): Promise<any> {
+
         const url = `${this.baseUrl}business/${this.id}`;
 
         return this.http.get(url)
             .toPromise()
             .then(response => response.json() as OneClickApiGlobalBusiness)
-            .catch(error => console.log('Une erreur est survenue ' + error))
+            .catch(error => console.log('Une erreur est survenue getGlobalBusi ' + error))
     }
+    
+
+    // Get all businesses
 
     public getBusinesses(): Promise<any> {
         const url = `${this.baseUrl}businesses`;
@@ -45,6 +53,6 @@ export class oneClickApiService {
         return this.http.get(url)
             .toPromise()
             .then(response => response.json() as OneClickApiBusinesses)
-            .catch(error => console.log('Une erreur est survenue ' + error))
+            .catch(error => console.log('Une erreur est survenue getBusinesses ' + error))
     }
 } 

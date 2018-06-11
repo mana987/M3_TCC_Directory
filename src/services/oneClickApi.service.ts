@@ -8,7 +8,7 @@ import 'rxjs/add/operator/map';
 
 // Models
 import { OneClickApiSkills } from '../pages/models/oneClickApi-skills.model'
-import { OneClickApiGlobalBusiness} from '../pages/models/oneClickApi-global-business.model'
+// import { OneClickApiGlobalBusiness} from '../pages/models/oneClickApi-global-business.model'
 import { OneClickApiBusinesses } from '../pages/models/oneClickApi-businesses.model'
 
 @Injectable()
@@ -34,15 +34,15 @@ export class oneClickApiService {
 
     // Get business ID
 
-    public getGlobalBusiness (): Promise<any> {
+    // public getGlobalBusiness (): Promise<any> {
 
-        const url = `${this.baseUrl}business/${this.id}`;
+    //     const url = `${this.baseUrl}business/${this.id}`;
 
-        return this.http.get(url)
-            .toPromise()
-            .then(response => response.json() as OneClickApiGlobalBusiness)
-            .catch(error => console.log('Une erreur est survenue getGlobalBusi ' + error))
-    }
+    //     return this.http.get(url)
+    //         .toPromise()
+    //         .then(response => response.json() as OneClickApiGlobalBusiness)
+    //         .catch(error => console.log('Une erreur est survenue getGlobalBusi ' + error))
+    // }
     
 
     // Get all businesses

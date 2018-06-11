@@ -27,11 +27,11 @@ export class HomePage {
           console.log('skills',this.skills);
         });
 
-        this.OCAS.getGlobalBusiness()
-        .then(globalBusinessFetched => {
-          this.globalBusiness = globalBusinessFetched;
-          console.log('businesses',this.globalBusiness);
-        });
+        // this.OCAS.getGlobalBusiness()
+        // .then(globalBusinessFetched => {
+        //   this.globalBusiness = globalBusinessFetched;
+        //   console.log('businesses',this.globalBusiness);
+        // });
 
         this.OCAS.getBusinesses()
         .then(businessesFetched => {

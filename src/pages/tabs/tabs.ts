@@ -1,10 +1,9 @@
-
 import { Component } from '@angular/core';
 
 
 //Menu Tabs = Page
-import { AboutPage } from '../about/about';
-import { ContactPage } from '../contact/contact';
+import { FavPage } from '../fav/fav';
+import { GoogleMapPage } from '../googlemap/googlemap';
 import { HomePage } from '../home/home';
 import { InfoPage } from './../info/info';
 
@@ -14,8 +13,8 @@ import { InfoPage } from './../info/info';
 export class TabsPage {
 
   tab1Root = HomePage;
-  tab2Root = AboutPage;
-  tab3Root = ContactPage;
+  tab2Root = FavPage;
+  tab3Root = GoogleMapPage;
   tab4Root = InfoPage;
 
   constructor() {

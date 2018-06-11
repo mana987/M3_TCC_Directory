@@ -5,8 +5,8 @@ import { MyApp } from './app.component';
 
 // Pages
 
-import { AboutPage } from '../pages/about/about';
-import { ContactPage } from '../pages/contact/contact';
+import { FavPage } from '../pages/fav/fav';
+import { GoogleMapPage } from '../pages/googlemap/googlemap';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
 import { InfoPage } from './../pages/info/info';
@@ -23,8 +23,8 @@ import { CallNumber } from '@ionic-native/call-number';
 @NgModule({
   declarations: [
     MyApp,
-    AboutPage,
-    ContactPage,
+    FavPage,
+    GoogleMapPage,
     HomePage,
     TabsPage,
     InfoPage
@@ -36,8 +36,8 @@ import { CallNumber } from '@ionic-native/call-number';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    AboutPage,
-    ContactPage,
+    FavPage,
+    GoogleMapPage,
     HomePage,
     TabsPage,
     InfoPage

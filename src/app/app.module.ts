@@ -9,6 +9,7 @@ import { AboutPage } from '../pages/about/about';
 import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
+import { InfoPage } from './../pages/info/info';
 
 // Native components
 
@@ -25,7 +26,8 @@ import { CallNumber } from '@ionic-native/call-number';
     AboutPage,
     ContactPage,
     HomePage,
-    TabsPage
+    TabsPage,
+    InfoPage
   ],
   imports: [
     BrowserModule,
@@ -37,7 +39,8 @@ import { CallNumber } from '@ionic-native/call-number';
     AboutPage,
     ContactPage,
     HomePage,
-    TabsPage
+    TabsPage,
+    InfoPage
   ],
   providers: [
     StatusBar,

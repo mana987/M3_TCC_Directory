@@ -1,7 +1,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>modal</ion-title>
+    <ion-title>{{business.name}}</ion-title>
     <ion-buttons end>
       <button ion-button (click)="closeModal()"> Close </button>
     </ion-buttons>
@@ -10,9 +10,9 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
 
-  <ion-card  *ngFor="let business of businesses.data">
+  <ion-card>
 
     <img src="{{business.logo}}">
     <ion-fab right top>
@@ -22,13 +22,21 @@
     </ion-fab>
   
     <ion-item>
-      <h2>Museum of Football</h2>
-      <p>11 N. Way St, Madison, WI 53703</p>
+      <h2></h2>
+      <p>{{business.adresse}}</p>
     </ion-item>
   
     <ion-item>
       <h2>Horaire d'ouverture</h2>
-      <p></p>
+      <p>
+        Lundi   : {{business.monday_start}}-{{business.monday_end}}<br />    
+        Mardi   : {{business.tuesday_start}}-{{business.tuesday_end }}<br />      
+        Mercredi: {{business.wednesday_start}}-{{business.wednesday_end}}<br /> 
+        Jeudi   : {{business.thursday_start}}-{{business.thursday_end}}<br />   
+        Vendredi: {{business.friday_start}}-{{business.friday_end}}<br /> 
+        Samedi  : {{business.saturday_start}}-{{business.saturday_end}}<br />  
+        Dimanche: {{business.sunday_start}}-{{business.sunday_end}}<br /> 
+         </p>
     </ion-item>
   
     <ion-item>

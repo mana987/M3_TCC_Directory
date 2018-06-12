@@ -1,12 +1,11 @@
 import { Component } from '@angular/core';
-import { IonicPage,  NavParams, ViewController, Platform } from 'ionic-angular';
+import { IonicPage, NavParams, ViewController, Platform } from 'ionic-angular';
 
 // API
 
 import { oneClickApiService } from '../../services/oneClickApi.service';
-import { OneClickApiSkills } from '../models/oneClickApi-skills.model';
-import { OneClickApiGlobalBusiness} from '../models/oneClickApi-global-business.model';
-import { OneClickApiBusinesses } from '../models/oneClickApi-businesses.model'
+import { OneClickApiGlobalBusiness } from '../models/oneClickApi-global-business.model';
+import { HomePage } from '../home/home';
 
 @IonicPage()
 @Component({
@@ -15,33 +14,28 @@ import { OneClickApiBusinesses } from '../models/oneClickApi-businesses.model'
 })
 export class ModalPage {
 
-  skills: OneClickApiSkills;
-  businesses: OneClickApiBusinesses = new OneClickApiBusinesses();
-  globalBusiness: OneClickApiGlobalBusiness = new OneClickApiGlobalBusiness();
   
-  constructor(private navParams: NavParams, private view:ViewController, private platform: Platform, private OCAS: oneClickApiService) {
+  business: OneClickApiGlobalBusiness = new OneClickApiGlobalBusiness();
+
+  constructor(private navParams: NavParams, private view: ViewController, private platform: Platform, private OCAS: oneClickApiService) {
     platform.ready()
-    .then(() => {
+      .then(() => {
 
-      this.OCAS.getSkills()
-        .then(skillsFetched => {
-          this.skills = skillsFetched;
-          console.log('skills',this.skills);
-        });
+        let ID = this.navParams.get("businessId");
+        this.OCAS.getBusiness(ID)
+          .then(businessFetched => {
+            this.business = businessFetched;
+            console.log('businesses', this.business);
+          });
 
-        this.OCAS.getBusinesses()
-        .then(businessesFetched => {
-          this.businesses = businessesFetched;
-          console.log('businesses',this.businesses);
-        });
-    })
+      })
   }
 
   ionViewWillLoad() {
 
   }
 
-  closeModal (){
+  closeModal() {
     this.view.dismiss();
   }
 

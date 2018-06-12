@@ -1,6 +1,7 @@
 <ion-header>
   <ion-navbar>
     <ion-title>Liste entreprise</ion-title>
+    <button ion-button block color="danger" (click)="doCheckbox()">Show Checkbox Alert</button>
   </ion-navbar>
 </ion-header>
 
@@ -13,8 +14,8 @@
           <img src="{{business.logo}}">
         </ion-thumbnail>
         <h2>{{business.name}}</h2>
-        <p>{{business.skills}}</p>
-        <button ion-button clear item-end (click)="openModal()">Voir</button>
+        <p>{{business.skill}}</p>
+        <button ion-button clear item-end (click)="openModal(business.id)">Voir</button>
       </ion-item>
 
       <ion-item-options side="right">

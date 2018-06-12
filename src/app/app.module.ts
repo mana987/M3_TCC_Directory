@@ -19,6 +19,7 @@ import { SQLite, SQLiteObject } from '@ionic-native/sqlite';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { SMS } from '@ionic-native/sms';
 import { CallNumber } from '@ionic-native/call-number';
+import { Geolocation } from "@ionic-native/geolocation";
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { CallNumber } from '@ionic-native/call-number';
     InAppBrowser,
     SMS,
     CallNumber,
+    Geolocation,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

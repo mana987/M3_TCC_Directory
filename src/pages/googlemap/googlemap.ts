@@ -21,31 +21,28 @@ export class GoogleMapPage {
   map: any;
 
   constructor(public navCtrl: NavController, private geolocation: Geolocation, public platform: Platform) {
-  platform.ready().then (() => {
-    this.loadMap();
-  });
+    platform.ready().then(() => {
+      this.loadMap();
+    });
 
-   }
-
-  ionViewDidLoad() {
-    this.loadMap();
   }
+
 
   loadMap() {
 
     this.geolocation.getCurrentPosition()
-    
-    .then((position) => {
-      let latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-      let mapOptions = {
-        center: latLng,
-        zoom: 17,
-        mapTypeId: google.maps.MapTypeId.ROADMAP
-      }
-      this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
 
-    }, (err) => {
-      console.log(err);
-    });
+      .then((position) => {
+        let latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+        let mapOptions = {
+          center: latLng,
+          zoom: 17,
+          travelMode: google.maps.TravelMode.ROADMAP
+        }
+        this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
+
+      }, (err) => {
+        console.log(err);
+      });
   }
 }

@@ -10,6 +10,7 @@ import { GoogleMapPage } from '../pages/googlemap/googlemap';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
 import { InfoPage } from './../pages/info/info';
+import { WelcomePage } from './../pages/welcome/welcome';
 
 // Native components
 
@@ -28,7 +29,8 @@ import { Geolocation } from "@ionic-native/geolocation";
     GoogleMapPage,
     HomePage,
     TabsPage,
-    InfoPage
+    InfoPage,
+    WelcomePage,
   ],
   imports: [
     BrowserModule,
@@ -41,7 +43,8 @@ import { Geolocation } from "@ionic-native/geolocation";
     GoogleMapPage,
     HomePage,
     TabsPage,
-    InfoPage
+    InfoPage,
+    WelcomePage,
   ],
   providers: [
     StatusBar,

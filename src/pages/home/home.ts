@@ -16,7 +16,7 @@ export class HomePage {
   
   doCheckbox() {
     let alert = this.alertCtrl.create();
-    alert.setTitle('Which planets have you visited?');
+    alert.setTitle('Quel Compétences recherchez-vous??');
 
     alert.addInput({
       type: 'checkbox',
@@ -73,9 +73,9 @@ export class HomePage {
       value: 'value6'
     });
 
-    alert.addButton('Cancel');
+    alert.addButton('Quitter');
     alert.addButton({
-      text: 'Okay',
+      text: 'Filtrer',
       handler: data => {
         console.log('Checkbox data:', data);
         this.testCheckboxOpen = false;

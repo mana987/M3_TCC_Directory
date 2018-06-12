@@ -14,22 +14,25 @@ import { OneClickApiBusinesses } from '../pages/models/oneClickApi-businesses.mo
 @Injectable()
 export class oneClickApiService {
 
+    items = [];
     private baseUrl: string = 'http://tccdirectory.1click.pf/api/';
-
-    constructor(private http: Http) { 
-
+    // private page = 2;
+    constructor(private http: Http) {
+        for (let i = 0; i < 30; i++) {
+            this.items.push(this.items.length);
+        }
     }
 
-// Get all Skills
+    // Get all Skills
 
-    public getSkills() : any {
+    public getSkills(): Promise<any> {
         const url = `${this.baseUrl}skills`;
 
         return this.http.get(url)
             .toPromise()
             .then(response => response.json() as OneClickApiSkills)
             .catch(error => console.log('Une erreur est survenue getSkill ' + error))
-    }  
+    }
 
 
     // Get all businesses
@@ -43,7 +46,7 @@ export class oneClickApiService {
             .catch(error => console.log('Une erreur est survenue getBusinesses ' + error))
     }
 
-        // Get business ID
+    // Get business ID
 
     // public getGlobalBusiness (): Promise<any> {
 
@@ -54,5 +57,21 @@ export class oneClickApiService {
     //         .then(response => response.json() as OneClickApiGlobalBusiness)
     //         .catch(error => console.log('Une erreur est survenue getGlobalBusi ' + error))
     // }
-    
-} 
+
+    doInfinite(infiniteScroll) {
+        console.log('Begin async operation');
+
+        setTimeout(() => {
+            this.getBusinesses()
+            .then ()
+            for (let i = 0; i < 15; i++) {
+                this.items.push(this.items.length);
+            }
+
+            console.log('Async operation has ended');
+            infiniteScroll.complete();
+        }, 50);
+    }
+
+}
+

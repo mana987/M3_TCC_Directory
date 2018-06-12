@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, Platform } from 'ionic-angular';
 
+
 // API
 
 import { oneClickApiService } from '../../services/oneClickApi.service';

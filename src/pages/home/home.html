@@ -5,7 +5,7 @@
 </ion-header>
 
 <ion-content>
-  <ion-card *ngFor="let business of businesses.data">
+  <!-- <ion-card *ngFor="let business of businesses.data">
 
     <img src="{{business.logo}}">
 
@@ -30,5 +30,48 @@
       </button>
     </ion-item>
 
-  </ion-card>
+  </ion-card> -->
+
+  <!-- <ion-item-sliding  *ngFor="let business of businesses.data">
+
+    <ion-item  (tap)="getGlobalBusiness()">
+      <ion-avatar item-start>
+        <img src="{{business.logo}}">
+      </ion-avatar>
+      <h2>{{business.name}}</h2>
+    </ion-item>
+    <ion-item-options side="left">
+      <button ion-button color="primary">
+        <ion-icon name="text"></ion-icon>
+        Text
+      </button>
+      <button ion-button color="secondary">
+        <ion-icon name="call"></ion-icon>
+        Call
+      </button>
+    </ion-item-options>
+    <ion-item-options side="right">
+      <button ion-button color="primary">
+        <ion-icon name="mail"></ion-icon>
+        Email
+      </button>
+    </ion-item-options>
+  </ion-item-sliding> -->
+
+  <ion-list  *ngFor="let business of businesses.data">
+      <ion-item>
+        <ion-thumbnail item-start>
+          <img src="{{business.logo}}">
+        </ion-thumbnail>
+        <h2>{{business.name}}</h2>
+        <p>{{business.skill}}</p>
+        <button ion-button clear item-end>View</button>
+      </ion-item>
+    </ion-list>
+  
+    <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+        <ion-infinite-scroll-content></ion-infinite-scroll-content>
+      </ion-infinite-scroll>
+
+
 </ion-content>

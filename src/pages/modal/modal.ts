@@ -1,8 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, Platform } from 'ionic-angular';
-import { ModalController } from 'ionic-angular';
-import { ModalPage } from '../modal/modal';
-
+import { IonicPage,  NavParams, ViewController, Platform } from 'ionic-angular';
 
 // API
 
@@ -11,24 +8,20 @@ import { OneClickApiSkills } from '../models/oneClickApi-skills.model';
 import { OneClickApiGlobalBusiness} from '../models/oneClickApi-global-business.model';
 import { OneClickApiBusinesses } from '../models/oneClickApi-businesses.model'
 
+@IonicPage()
 @Component({
-  selector: 'page-home',
-  templateUrl: 'home.html'
+  selector: 'page-modal',
+  templateUrl: 'modal.html',
 })
-export class HomePage {
+export class ModalPage {
 
-  items = [];
   skills: OneClickApiSkills;
   businesses: OneClickApiBusinesses = new OneClickApiBusinesses();
   globalBusiness: OneClickApiGlobalBusiness = new OneClickApiGlobalBusiness();
-
-  constructor(public navCtrl: NavController, private platform: Platform, private OCAS: oneClickApiService,public modalCtrl: ModalController) {
+  
+  constructor(private navParams: NavParams, private view:ViewController, private platform: Platform, private OCAS: oneClickApiService) {
     platform.ready()
     .then(() => {
-      
-      for (let i = 0; i < 30; i++) {
-        this.items.push( this.items.length );
-      }
 
       this.OCAS.getSkills()
         .then(skillsFetched => {
@@ -44,23 +37,14 @@ export class HomePage {
     })
   }
 
-  openModal() {
-    const modal = this.modalCtrl.create(ModalPage);
-    modal.present();
+  ionViewWillLoad() {
+
   }
 
-  doInfinite(infiniteScroll) {
-    console.log('Begin async operation');
-
-    setTimeout(() => {
-      for (let i = 0; i < 30; i++) {
-        this.items.push( this.items.length );
-        this.OCAS.getBusinesses();
-      }
-
-      console.log('Async operation has ended');
-      infiniteScroll.complete();
-    }, 25);
+  closeModal (){
+    this.view.dismiss();
   }
+
+
 
 }

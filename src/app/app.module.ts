@@ -12,6 +12,7 @@ import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
 import { WelcomePage } from '../pages/welcome/welcome';
+import { ModalPage } from '../pages/modal/modal'
 
 // Native components
 
@@ -31,6 +32,7 @@ import { CallNumber } from '@ionic-native/call-number';
     HomePage,
     TabsPage,
     WelcomePage,
+    ModalPage,
   ],
   imports: [
     HttpModule,
@@ -45,6 +47,7 @@ import { CallNumber } from '@ionic-native/call-number';
     HomePage,
     TabsPage,
     WelcomePage,
+    ModalPage,
   ],
   providers: [
     oneClickApiService,

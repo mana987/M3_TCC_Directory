@@ -5,73 +5,26 @@
 </ion-header>
 
 <ion-content>
-  <!-- <ion-card *ngFor="let business of businesses.data">
 
-    <img src="{{business.logo}}">
-
-    <ion-item>
-      <ion-icon name="football" item-start large></ion-icon>
-      <h2>{{business.name}}</h2>
-      <p>11 N. Way St, Madison, WI 53703</p>
-    </ion-item>
-
-    <ion-item>
-      <ion-icon name="wine" item-left large></ion-icon>
-      <h2>Institute of Fine Cocktails</h2>
-      <p>14 S. Hop Avenue, Madison, WI 53703</p>
-    </ion-item>
-
-    <ion-item>
-      <span item-left>18 min</span>
-      <span item-left>(2.6 mi)</span>
-      <button ion-button icon-left clear item-end>
-        <ion-icon name="navigate"></ion-icon>
-        Start
-      </button>
-    </ion-item>
-
-  </ion-card> -->
-
-  <!-- <ion-item-sliding  *ngFor="let business of businesses.data">
-
-    <ion-item  (tap)="getGlobalBusiness()">
-      <ion-avatar item-start>
-        <img src="{{business.logo}}">
-      </ion-avatar>
-      <h2>{{business.name}}</h2>
-    </ion-item>
-    <ion-item-options side="left">
-      <button ion-button color="primary">
-        <ion-icon name="text"></ion-icon>
-        Text
-      </button>
-      <button ion-button color="secondary">
-        <ion-icon name="call"></ion-icon>
-        Call
-      </button>
-    </ion-item-options>
-    <ion-item-options side="right">
-      <button ion-button color="primary">
-        <ion-icon name="mail"></ion-icon>
-        Email
-      </button>
-    </ion-item-options>
-  </ion-item-sliding> -->
-
-  <ion-list  *ngFor="let business of businesses.data">
+  <ion-list >
+    <ion-item-sliding #item *ngFor="let business of businesses.data">
       <ion-item>
         <ion-thumbnail item-start>
           <img src="{{business.logo}}">
         </ion-thumbnail>
         <h2>{{business.name}}</h2>
-        <p>{{business.skill}}</p>
-        <button ion-button clear item-end>View</button>
+        <p>{{business.skills}}</p>
+        <button ion-button clear item-end (click)="openModal()">Voir</button>
       </ion-item>
-    </ion-list>
-  
-    <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
-        <ion-infinite-scroll-content></ion-infinite-scroll-content>
-      </ion-infinite-scroll>
 
+      <ion-item-options side="right">
+        <button ion-button color="danger"  (click)="(item)">Abus</button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+      <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
 
 </ion-content>

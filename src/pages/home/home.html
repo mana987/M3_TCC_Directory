@@ -20,7 +20,11 @@
         </ion-thumbnail>
         <h2>{{business.name}}</h2>
         <!-- <p>{{skill.name}}</p> -->
+        
         <button ion-button clear item-end (click)="openModal(business.id)">Voir</button>
+        <button ion-button item-end>
+          <ion-icon name="star"></ion-icon>
+        </button>
       </ion-item>
 
       <ion-item-options side="right">

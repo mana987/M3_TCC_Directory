@@ -2,8 +2,11 @@
 
   <ion-navbar>
     <ion-title>{{business.name}}</ion-title>
-    <ion-buttons end>
-      <button ion-button (click)="closeModal()"> Close </button>
+    <ion-buttons>
+      <button ion-button icon-left (click)="closeModal()">
+        <ion-icon name="arrow-back"></ion-icon>
+        Retour
+      </button>
     </ion-buttons>
   </ion-navbar>
 
@@ -13,41 +16,60 @@
 <ion-content>
 
   <ion-card>
+    <div>
+      <img src="{{business.logo}}">
+      <ion-fab right top>
+        <button ion-fab color="blue">
+          <ion-icon name="contact"></ion-icon>
+        </button>
+        <ion-fab-list side="bottom">
+          <button ion-fab>
+            <ion-icon name="logo-facebook"></ion-icon>
+          </button>
+          <button ion-fab>
+            <ion-icon name="logo-twitter"></ion-icon>
+          </button>
+          <button ion-fab>
+              <ion-icon name="logo-linkedin"></ion-icon>
+            </button>
+          <button (click)="callBusinessNumber()"  ion-fab>
+            <ion-icon name="call"></ion-icon>
+          </button>
+          <button ion-fab>
+            <ion-icon name="text"></ion-icon>
+          </button>
+        </ion-fab-list>
+      </ion-fab>
+    </div>
 
-    <img src="{{business.logo}}">
-    <ion-fab right top>
-      <button ion-fab>
-        <ion-icon name="pin"></ion-icon>
-      </button>
-    </ion-fab>
-  
+    <button ion-button icon-left clear item-end>
+      <ion-icon name="navigate"></ion-icon>
+      Start
+    </button>
     <ion-item>
       <h2></h2>
       <p>{{business.adresse}}</p>
     </ion-item>
-  
+
     <ion-item>
       <h2>Horaire d'ouverture</h2>
       <p>
-        Lundi   : {{business.monday_start}}-{{business.monday_end}}<br />    
-        Mardi   : {{business.tuesday_start}}-{{business.tuesday_end }}<br />      
-        Mercredi: {{business.wednesday_start}}-{{business.wednesday_end}}<br /> 
-        Jeudi   : {{business.thursday_start}}-{{business.thursday_end}}<br />   
-        Vendredi: {{business.friday_start}}-{{business.friday_end}}<br /> 
-        Samedi  : {{business.saturday_start}}-{{business.saturday_end}}<br />  
-        Dimanche: {{business.sunday_start}}-{{business.sunday_end}}<br /> 
-         </p>
+        Lundi : {{business.monday_start}}-{{business.monday_end}}
+        <br /> Mardi : {{business.tuesday_start}}-{{business.tuesday_end }}
+        <br /> Mercredi: {{business.wednesday_start}}-{{business.wednesday_end}}
+        <br /> Jeudi : {{business.thursday_start}}-{{business.thursday_end}}
+        <br /> Vendredi: {{business.friday_start}}-{{business.friday_end}}
+        <br /> Samedi : {{business.saturday_start}}-{{business.saturday_end}}
+        <br /> Dimanche: {{business.sunday_start}}-{{business.sunday_end}}
+        <br />
+      </p>
     </ion-item>
-  
+
     <ion-item>
       <span item-left>18 min</span>
       <span item-left>(2.6 mi)</span>
-      <button ion-button icon-left clear item-end>
-        <ion-icon name="navigate"></ion-icon>
-        Start
-      </button>
     </ion-item>
-    
+
   </ion-card>
 
 </ion-content>

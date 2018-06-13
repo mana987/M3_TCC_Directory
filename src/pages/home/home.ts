@@ -10,6 +10,8 @@ import { oneClickApiService } from '../../services/oneClickApi.service';
 import { OneClickApiSkills } from '../models/oneClickApi-skills.model';
 import { OneClickApiGlobalBusiness } from '../models/oneClickApi-global-business.model';
 import { OneClickApiBusinesses } from '../models/oneClickApi-businesses.model'
+import { OneClickGlobalApiSkill } from '../models/oneClickAPi-global-skill.model'
+import { CallNumber } from '@ionic-native/call-number';
 
 @Component({
   selector: 'page-home',
@@ -17,14 +19,14 @@ import { OneClickApiBusinesses } from '../models/oneClickApi-businesses.model'
 })
 export class HomePage {
 
-  testCheckboxOpen: boolean;
-  testCheckboxResult;
+  filter : Array<string>;
   items = [];
-  skills: OneClickApiSkills;
+  skills: OneClickApiSkills = new OneClickApiSkills();
   businesses: OneClickApiBusinesses = new OneClickApiBusinesses();
   globalBusiness: OneClickApiGlobalBusiness = new OneClickApiGlobalBusiness();
+  postSkills:OneClickGlobalApiSkill = new OneClickGlobalApiSkill();
 
-  constructor(public navCtrl: NavController, private platform: Platform, private OCAS: oneClickApiService, public modalCtrl: ModalController, public alertCtrl: AlertController) {
+  constructor(public navCtrl: NavController, private platform: Platform, private OCAS: oneClickApiService, public modalCtrl: ModalController, public alertCtrl: AlertController,private callNumber: CallNumber) {
     platform.ready()
       .then(() => {
 
@@ -32,17 +34,23 @@ export class HomePage {
           this.items.push(this.items.length);
         }
 
-        // this.OCAS.getSkills()
-        //   .then(skillsFetched => {
-        //     this.skills = skillsFetched;
-        //     console.log('skills',this.skills);
-        //   });
+        this.OCAS.getSkills()
+          .then(skillsFetched => {
+            this.skills = skillsFetched;
+            console.log('skills',this.skills);
+          });
 
         this.OCAS.getBusinesses()
           .then(businessesFetched => {
             this.businesses = businessesFetched;
             console.log('businesses', this.businesses);
           });
+
+        this.OCAS.postSkills()
+        .then(postSkillsFetched => {
+          this.postSkills = postSkillsFetched;
+          console.log('businesses', this.postSkills);
+        });
       })
   }
 
@@ -67,28 +75,4 @@ export class HomePage {
       infiniteScroll.complete();
     }, 25);
   }
-
-  doCheckbox() {
-    let alert = this.alertCtrl.create();
-    alert.setTitle('Sélection des compétences');
-    alert.addInput({
-      type: 'checkbox',
-      label: 'Alderaan',
-      value: 'value1',
-    });
-    alert.addButton('Cancel');
-    alert.addButton({
-      text: 'Okay',
-      handler: data => {
-        console.log('Checkbox data:', data);
-        this.testCheckboxOpen = false;
-        this.testCheckboxResult = data;
-      }
-    });
-    alert.present().then(() => {
-      this.testCheckboxOpen = true;
-    });
-  }
-
-
 }

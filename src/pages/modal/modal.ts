@@ -5,7 +5,7 @@ import { IonicPage, NavParams, ViewController, Platform } from 'ionic-angular';
 
 import { oneClickApiService } from '../../services/oneClickApi.service';
 import { OneClickApiGlobalBusiness } from '../models/oneClickApi-global-business.model';
-import { HomePage } from '../home/home';
+import { CallNumber } from '@ionic-native/call-number';
 
 @IonicPage()
 @Component({
@@ -17,7 +17,7 @@ export class ModalPage {
   
   business: OneClickApiGlobalBusiness = new OneClickApiGlobalBusiness();
 
-  constructor(private navParams: NavParams, private view: ViewController, private platform: Platform, private OCAS: oneClickApiService) {
+  constructor(private navParams: NavParams, private view: ViewController, private platform: Platform, private OCAS: oneClickApiService, private callNumber: CallNumber) {
     platform.ready()
       .then(() => {
 
@@ -30,6 +30,12 @@ export class ModalPage {
 
       })
   }
+
+  // callBusinessNumber(){
+  //   this.callNumber.callNumber("18001010101", true)
+  // .then(res => console.log('Launched dialer!', res))
+  // .catch(err => console.log('Error launching dialer', err));
+  // }
 
   ionViewWillLoad() {
 

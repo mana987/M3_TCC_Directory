@@ -10,7 +10,7 @@ import 'rxjs/add/operator/map';
 import { OneClickApiSkills } from '../pages/models/oneClickApi-skills.model'
 import { OneClickApiBusinesses } from '../pages/models/oneClickApi-businesses.model'
 import { OneClickApiGlobalBusiness } from '../pages/models/oneClickApi-global-business.model'
-
+import { OneClickGlobalApiSkill } from '../pages/models/oneClickAPi-global-skill.model'
 @Injectable()
 export class oneClickApiService {
 
@@ -55,12 +55,23 @@ export class oneClickApiService {
             .catch(error => console.log('Une erreur est survenue getSkill ' + error))
     }
 
-    public postSkills(skills): Promise<any> {
-        const url = `${this.baseUrl}search/` + skills;
+    public getGlobalSkill(idSkill): Promise<any> {
+        const url = `${this.baseUrl}skill/` + idSkill ;
+
         return this.http.get(url)
+            .toPromise()
+            .then(response => response.json() as OneClickGlobalApiSkill)
+            .catch(error => console.log('Une erreur est survenue getSkill ' + error))
+    }
+
+    public postSkills(): Promise<any> {
+        const url = `${this.baseUrl}search/{"skills":"idSkill"}`;
+        return this.http.post(url)
             .toPromise()
             .then(response => response.json() as OneClickApiSkills)
             .catch(error => console.log('Une erreur est survenue getSkill ' + error))
     }
+
+    
 }
 

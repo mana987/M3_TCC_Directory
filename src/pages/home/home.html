@@ -1,31 +1,37 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>Liste entreprise</ion-title>
-    <button ion-button block color="danger" (click)="doCheckbox()">Show Checkbox Alert</button>
+    <ion-title>Entreprises</ion-title>
+    <ion-item>
+      <ion-label>Filtre</ion-label>
+      <ion-select [(ngModel)]="filter" multiple="true" (ionchange)="Select($event)">
+        
+        <ion-option value="{{skill.id}}" *ngFor="let skill of skills.data">{{skill.name}}</ion-option>
+      </ion-select>
+    </ion-item>
   </ion-navbar>
 </ion-header>
 
 <ion-content>
 
-  <ion-list >
+  <ion-list>
     <ion-item-sliding #item *ngFor="let business of businesses.data">
       <ion-item>
         <ion-thumbnail item-start>
           <img src="{{business.logo}}">
         </ion-thumbnail>
         <h2>{{business.name}}</h2>
-        <p>{{business.skill}}</p>
+        <!-- <p>{{skill.name}}</p> -->
         <button ion-button clear item-end (click)="openModal(business.id)">Voir</button>
       </ion-item>
 
       <ion-item-options side="right">
-        <button ion-button color="danger"  (click)="(item)">Abus</button>
+        <button ion-button color="danger" (click)="(item)">Abus</button>
       </ion-item-options>
     </ion-item-sliding>
   </ion-list>
 
   <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
-      <ion-infinite-scroll-content></ion-infinite-scroll-content>
-    </ion-infinite-scroll>
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 
 </ion-content>

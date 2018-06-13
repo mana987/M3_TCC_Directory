@@ -13,7 +13,6 @@ import { CallNumber } from '@ionic-native/call-number';
   templateUrl: 'modal.html',
 })
 export class ModalPage {
-
   
   business: OneClickApiGlobalBusiness = new OneClickApiGlobalBusiness();
 
@@ -31,11 +30,11 @@ export class ModalPage {
       })
   }
 
-  // callBusinessNumber(){
-  //   this.callNumber.callNumber("18001010101", true)
-  // .then(res => console.log('Launched dialer!', res))
-  // .catch(err => console.log('Error launching dialer', err));
-  // }
+  public callBusinessNumber(){
+    this.callNumber.callNumber("18001010101", true)
+  .then(res => console.log('Launched dialer!', res))
+  .catch(err => console.log('Error launching dialer', err));
+  }
 
   ionViewWillLoad() {
 
@@ -44,7 +43,5 @@ export class ModalPage {
   closeModal() {
     this.view.dismiss();
   }
-
-
 
 }

@@ -7,11 +7,8 @@ import { oneClickApiService } from '../services/oneClickApi.service'
 
 // Pages
 
-import { AboutPage } from '../pages/about/about';
-import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
-import { WelcomePage } from '../pages/welcome/welcome';
 import { ModalPage } from '../pages/modal/modal'
 
 // Native components
@@ -27,11 +24,8 @@ import { CallNumber } from '@ionic-native/call-number';
 @NgModule({
   declarations: [
     MyApp,
-    AboutPage,
-    ContactPage,
     HomePage,
     TabsPage,
-    WelcomePage,
     ModalPage,
   ],
   imports: [
@@ -42,11 +36,8 @@ import { CallNumber } from '@ionic-native/call-number';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    AboutPage,
-    ContactPage,
     HomePage,
     TabsPage,
-    WelcomePage,
     ModalPage,
   ],
   providers: [

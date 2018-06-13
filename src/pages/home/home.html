@@ -3,8 +3,7 @@
     <ion-title>Entreprises</ion-title>
     <ion-item>
       <ion-label>Filtre</ion-label>
-      <ion-select [(ngModel)]="filter" multiple="true" (ionchange)="Select($event)">
-        
+      <ion-select [(ngModel)]="filter" multiple="true" (ionChange)="showSelectValue(filter)">
         <ion-option value="{{skill.id}}" *ngFor="let skill of skills.data">{{skill.name}}</ion-option>
       </ion-select>
     </ion-item>
@@ -14,7 +13,7 @@
 <ion-content>
 
   <ion-list>
-    <ion-item-sliding #item *ngFor="let business of businesses.data">
+    <ion-item-sliding #item *ngFor="let business of businesses">
       <ion-item>
         <ion-thumbnail item-start>
           <img src="{{business.logo}}">
@@ -30,8 +29,8 @@
     </ion-item-sliding>
   </ion-list>
 
-  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
-    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)" *ngIf="page <totalPage">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data..."></ion-infinite-scroll-content>
   </ion-infinite-scroll>
 
 </ion-content>

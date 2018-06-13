@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, Platform, AlertController } from 'ionic-angular';
+import { NavController, Platform, AlertController, NavParams } from 'ionic-angular';
 import { ModalController } from 'ionic-angular';
 import { ModalPage } from '../modal/modal';
 
@@ -19,39 +19,75 @@ import { CallNumber } from '@ionic-native/call-number';
 })
 export class HomePage {
 
-  filter : Array<string>;
+  filter: Array<string>;
   items = [];
   skills: OneClickApiSkills = new OneClickApiSkills();
-  businesses: OneClickApiBusinesses = new OneClickApiBusinesses();
   globalBusiness: OneClickApiGlobalBusiness = new OneClickApiGlobalBusiness();
-  postSkills:OneClickGlobalApiSkill = new OneClickGlobalApiSkill();
+  postSkills: OneClickGlobalApiSkill = new OneClickGlobalApiSkill();
+  data: any;
+  businesses: string[];
+  errorMessage: string;
+  page = 1;
+  perPage = 0;
+  totalData = 0;
+  totalPage = 0;
 
-  constructor(public navCtrl: NavController, private platform: Platform, private OCAS: oneClickApiService, public modalCtrl: ModalController, public alertCtrl: AlertController,private callNumber: CallNumber) {
+  constructor(public navCtrl: NavController, private platform: Platform, private OCAS: oneClickApiService, public modalCtrl: ModalController, public alertCtrl: AlertController, private callNumber: CallNumber, private navParams: NavParams) {
     platform.ready()
       .then(() => {
-
-        for (let i = 0; i < 30; i++) {
-          this.items.push(this.items.length);
-        }
-
+        this.getBusinesses();
         this.OCAS.getSkills()
           .then(skillsFetched => {
             this.skills = skillsFetched;
-            console.log('skills',this.skills);
+            console.log('skills', this.skills);
           });
-
-        this.OCAS.getBusinesses()
-          .then(businessesFetched => {
-            this.businesses = businessesFetched;
-            console.log('businesses', this.businesses);
-          });
-
-        this.OCAS.postSkills()
-        .then(postSkillsFetched => {
-          this.postSkills = postSkillsFetched;
-          console.log('businesses', this.postSkills);
-        });
       })
+  }
+
+  // Get All Businesses 
+
+  getBusinesses() {
+    this.OCAS.getBusinesses(this.page)
+      .subscribe(
+        res => {
+          this.data = res;
+          // console.log("HomePage/data", res);
+          this.businesses = this.data.data;
+          // console.log("HomePage/businesses", this.data.data);
+          this.perPage = this.data.per_page;
+          console.log("HomePage/perPage", this.data.per_page);
+          this.totalData = this.data.total;
+          console.log("HomePage/totalData", this.data.total);
+          this.totalPage = this.data.last_page;
+          console.log("HomePage/totalPage", this.data.last_page);
+        },
+        error => this.errorMessage = <any>error);
+  }
+
+  // Inifinite scroll
+
+  doInfinite(infiniteScroll) {
+    this.page = this.page + 1;
+    setTimeout(() => {
+      this.OCAS.getBusinesses(this.page)
+        .subscribe(
+          res => {
+            this.data = res;
+            // console.log("HomePage/data", res);
+            this.perPage = this.data.per_page;
+            // console.log("HomePage/perPage", this.data.per_page);
+            this.totalData = this.data.total;
+            console.log("HomePage/totalData", this.data.total);
+            this.totalPage = this.data.last_page;
+            console.log("HomePage/totalPage", this.data.last_page);
+            for (let i = 0; i < this.data.data.length; i++) {
+              this.businesses.push(this.data.data[i]);
+            }
+          },
+          error => this.errorMessage = <any>error);
+      console.log('Async operation has ended');
+      infiniteScroll.complete();
+    }, 500);
   }
 
   // Open Modal 
@@ -61,18 +97,10 @@ export class HomePage {
     modal.present();
   }
 
-  // Infinite scroll
+  // Select Value from Skills
 
-  doInfinite(infiniteScroll) {
-    console.log('Begin async operation');
+  showSelectValue(value) {
+    console.info("Selected:", value);
 
-    setTimeout(() => {
-      for (let i = 0; i < 30; i++) {
-        this.items.push(this.items.length);
-        this.OCAS.getBusinesses();
-      }
-      console.log('Async operation has ended');
-      infiniteScroll.complete();
-    }, 25);
   }
 }

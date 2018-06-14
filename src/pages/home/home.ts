@@ -20,15 +20,15 @@ export class HomePage {
 
     alert.addInput({
       type: 'checkbox',
-      label: 'Alderaan',
+      label: 'PHP',
       value: 'value1',
       checked: true
     });
 
     alert.addInput({
       type: 'checkbox',
-      label: 'Bespin',
-      value: 'value2'
+      label: 'Javascript',
+      value: 'value2',
     });
 
     alert.addInput({

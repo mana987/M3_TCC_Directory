@@ -88,4 +88,10 @@
     <plugin name="cordova-plugin-whitelist" spec="^1.3.3" />
     <plugin name="cordova-plugin-device" spec="^2.0.2" />
     <plugin name="cordova-plugin-splashscreen" spec="^5.0.2" />
+    <plugin name="cordova-plugin-googlemaps" spec="^2.3.6">
+        <variable name="API_KEY_FOR_ANDROID" value="AIzaSyDpV3J58p0Rg_s4YWlZSHFLksXaGXrqQiw" />
+        <variable name="API_KEY_FOR_IOS" value="AIzaSyAoGFrlRqzzx9JDLYevPqEcc-4nvBzEvnM" />
+        <variable name="PLAY_SERVICES_VERSION" value="15.0.1" />
+        <variable name="ANDROID_SUPPORT_V4_VERSION" value="26.1.0" />
+    </plugin>
 </widget>

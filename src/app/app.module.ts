@@ -21,6 +21,8 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { SMS } from '@ionic-native/sms';
 import { CallNumber } from '@ionic-native/call-number';
 import { Geolocation } from "@ionic-native/geolocation";
+import { GoogleMaps } from "@ionic-native/google-maps";
+
 
 @NgModule({
   declarations: [
@@ -54,6 +56,7 @@ import { Geolocation } from "@ionic-native/geolocation";
     SMS,
     CallNumber,
     Geolocation,
+    GoogleMaps,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

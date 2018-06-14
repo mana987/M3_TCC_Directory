@@ -22,7 +22,7 @@ export class WelcomePage {
   }
 
   redirectToTabs() {
-    let limit = 10;
+    let limit = 4;
     let counter = 0;
     this.progress = 0;
     let myInterval = setInterval(() => {

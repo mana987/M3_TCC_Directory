@@ -107,7 +107,7 @@ export class HomePage {
   // Select Value from Skills
 
   showSelectValue(value) {
-    
+
     let list = value[0];
 
     if (list) {
@@ -131,7 +131,6 @@ export class HomePage {
       );
     } else {
       this.getBusinesses();
-      console.log("else");
     }
   }
 }

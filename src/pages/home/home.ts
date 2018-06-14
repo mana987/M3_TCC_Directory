@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, Platform, AlertController, NavParams } from 'ionic-angular';
 import { ModalController } from 'ionic-angular';
 import { ModalPage } from '../modal/modal';
-import { Toast } from '@ionic-native/toast';
+
 
 
 // API
@@ -10,10 +10,8 @@ import { Toast } from '@ionic-native/toast';
 import { oneClickApiService } from '../../services/oneClickApi.service';
 import { OneClickApiSkills } from '../models/oneClickApi-skills.model';
 import { OneClickApiGlobalBusiness } from '../models/oneClickApi-global-business.model';
-import { OneClickApiBusinesses } from '../models/oneClickApi-businesses.model'
 import { OneClickGlobalApiSkill } from '../models/oneClickAPi-global-skill.model'
-import { CallNumber } from '@ionic-native/call-number';
-import { InAppBrowser } from '@ionic-native/in-app-browser';
+
 
 @Component({
   selector: 'page-home',
@@ -21,9 +19,9 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
 })
 export class HomePage {
 
-  add:string;
+  add: string;
+  id: number;
   filter: Array<string>;
-  visible: boolean;
   value: string;
   items = [];
   skills: OneClickApiSkills = new OneClickApiSkills();
@@ -37,7 +35,7 @@ export class HomePage {
   totalData = 0;
   totalPage = 0;
 
-  constructor(public navCtrl: NavController, private platform: Platform, private OCAS: oneClickApiService, public modalCtrl: ModalController, public alertCtrl: AlertController, private callNumber: CallNumber, private navParams: NavParams, private iab: InAppBrowser, private toast: Toast) {
+  constructor(public navCtrl: NavController, private platform: Platform, private OCAS: oneClickApiService, public modalCtrl: ModalController, public alertCtrl: AlertController) {
     platform.ready()
       .then(() => {
         this.getBusinesses();
@@ -69,6 +67,10 @@ export class HomePage {
         error => this.errorMessage = <any>error);
   }
 
+  getAbus(id) {
+    this.OCAS.getAbus(id);
+    console.log('id', id)
+  }
   // Inifinite scroll
 
   doInfinite(infiniteScroll) {
@@ -102,37 +104,15 @@ export class HomePage {
     modal.present();
   }
 
-  starFav(event) {
-    console.log(event)
-    this.visible = !this.visible;
-    this.toastMessage();
-  }
-
-  toastMessage() {
-    if (this.visible) {
-      this.toast.show(`Ajouté aux favoris`, '1000', 'center')
-        .subscribe(
-          toast => {
-            console.log(toast);
-          }
-        );
-    }else{
-      this.toast.show(`Supprimé des favoris`, '1000', 'center')
-        .subscribe(
-          toast => {
-            console.log(toast);
-          }
-        );
-    }
-
-  }
   // Select Value from Skills
 
   showSelectValue(value) {
+    
+    let list = value[0];
 
-    if (value) {
+    if (list) {
       console.log("value = ", value);
-      this.businesses = [];
+      this.businesses = value;
       console.info("Selected:", value);
       this.OCAS.postSkills(value)
         .subscribe(
@@ -146,7 +126,7 @@ export class HomePage {
             console.log(this.businesses)
           },
           error => {
-            console.log(error); // Error if any
+            console.log(error);
           },
       );
     } else {

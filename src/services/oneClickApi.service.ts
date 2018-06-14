@@ -11,7 +11,7 @@ import 'rxjs/add/operator/catch';
 // Models
 import { OneClickApiSkills } from '../pages/models/oneClickApi-skills.model'
 import { OneClickApiGlobalBusiness } from '../pages/models/oneClickApi-global-business.model'
-import { OneClickGlobalApiSkill } from '../pages/models/oneClickAPi-global-skill.model'
+import { OneClickApiAbus } from '../pages/models/OneClickApi-abus.model';
 
 
 @Injectable()
@@ -75,23 +75,26 @@ export class oneClickApiService {
             .catch(error => console.log('Une erreur est survenue getSkill ' + error))
     }
 
-    // Get Skill ID
+    // Get Abus
 
-    // public getGlobalSkill(idSkill): Promise<any> {
-    //     const url = `${this.baseUrl}skill/` + idSkill ;
+    public getAbus(id): Promise<any> {
 
-    //     return this.http.get(url)
-    //         .toPromise()
-    //         .then(response => response.json() as OneClickGlobalApiSkill)
-    //         .catch(error => console.log('Une erreur est survenue getSkill ' + error))
-    // }
+        const url = `${this.baseUrl}abus/business/`+ id;
+        return this.http.get(url)
+
+            .toPromise()
+            .then(response => response.json() as OneClickApiAbus)
+            .catch(error => console.log('Une erreur est survenue getBusinesses ' + error))
+    }
+
+    // Post Skills
 
     public postSkills(skillID): Observable<any> {
 
         const url = `${this.baseUrl}search`;
         let postData = { "skills": skillID.join(",") };
         return this.http.post(url, postData)
-        .map((response: Response) => response.json());
+            .map((response: Response) => response.json());
     }
 }
 

@@ -9,7 +9,11 @@ import { oneClickApiService } from '../services/oneClickApi.service'
 
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
-import { ModalPage } from '../pages/modal/modal'
+import { ModalPage } from '../pages/modal/modal';
+import { WelcomePage } from '../pages/welcome/welcome';
+import { InfoPage } from '../pages/info/info';
+import { GooglemapPage } from '../pages/googlemap/googlemap';
+import { FavPage } from '../pages/fav/fav';
 
 // Native components
 
@@ -22,12 +26,20 @@ import { CallNumber } from '@ionic-native/call-number';
 import { Toast } from '@ionic-native/toast';
 
 
+
+
+
+
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
     TabsPage,
     ModalPage,
+    WelcomePage,
+    InfoPage,
+    GooglemapPage,
+    FavPage,
   ],
   imports: [
     HttpModule,
@@ -40,6 +52,10 @@ import { Toast } from '@ionic-native/toast';
     HomePage,
     TabsPage,
     ModalPage,
+    WelcomePage,
+    InfoPage,
+    GooglemapPage,
+    FavPage,
   ],
   providers: [
     oneClickApiService,

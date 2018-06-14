@@ -9,12 +9,9 @@
       </button>
     </ion-buttons>
   </ion-navbar>
-
 </ion-header>
 
-
 <ion-content>
-
   <ion-card>
     <div>
       <img src="{{business.logo}}">
@@ -23,6 +20,9 @@
           <ion-icon name="contact"></ion-icon>
         </button>
         <ion-fab-list side="bottom">
+            <button ion-fab>
+                <ion-icon (click)="openWebPage(business.website_url)" name="at"></ion-icon>
+              </button>
           <button ion-fab>
             <ion-icon (click)="openWebPage(business.facebook_url)" name="logo-facebook"></ion-icon>
           </button>
@@ -30,9 +30,9 @@
             <ion-icon (click)="openWebPage(business.twitter_url)" name="logo-twitter"></ion-icon>
           </button>
           <button ion-fab>
-              <ion-icon (click)="openWebPage(business.linkedin_url)" name="logo-linkedin"></ion-icon>
-            </button>
-          <button (click)="callBusinessNumber(business.phone)"  ion-fab>
+            <ion-icon (click)="openWebPage(business.linkedin_url)" name="logo-linkedin"></ion-icon>
+          </button>
+          <button (click)="callBusinessNumber(business.phone)" ion-fab>
             <ion-icon name="call"></ion-icon>
           </button>
           <button (click)="sendBusinessSMS(business.mobile)" ion-fab>
@@ -42,20 +42,33 @@
       </ion-fab>
     </div>
 
-    <button ion-button icon-left clear item-end>
+    <button ion-button icon-left clear item-start>
       <ion-icon name="navigate"></ion-icon>
-      Start
+      Aller !
     </button>
-    
+    <button ion-button clear item-end (click)="starFav(business.id)">
+      <ion-icon name="star" [isActive]="visible"></ion-icon>
+    </button>
+
     <ion-card padding>
-      <p>Adresse : {{business.adresse}}</p><br />
+      <h2>Adresse</h2>
+      <br/>
+      <p>{{business.adresse}}</p>
     </ion-card>
-      <ion-card padding>
-      <p>{{business.description}}</p>
+    <ion-card padding>
+      <h2>Mail</h2>
+      <br/>
+      <p>{{business.email}}</p>
     </ion-card>
-    
-    <ion-item>
+    <ion-card padding>
+      <h2>Description</h2>
+      <br/>
+      <p text-justify>{{business.description}}</p>
+    </ion-card>
+
+    <ion-card padding>
       <h2>Horaire d'ouverture</h2>
+      <br/>
       <p>
         Lundi : {{business.monday_start}}-{{business.monday_end}}
         <br /> Mardi : {{business.tuesday_start}}-{{business.tuesday_end }}
@@ -66,12 +79,7 @@
         <br /> Dimanche: {{business.sunday_start}}-{{business.sunday_end}}
         <br />
       </p>
-    </ion-item>
-
-    <ion-item>
-      <span item-left>18 min</span>
-      <span item-left>(2.6 mi)</span>
-    </ion-item>
+    </ion-card>
 
   </ion-card>
 

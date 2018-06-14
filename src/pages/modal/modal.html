@@ -1,0 +1,78 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{business.name}}</ion-title>
+    <ion-buttons>
+      <button ion-button icon-left (click)="closeModal()">
+        <ion-icon name="arrow-back"></ion-icon>
+        Retour
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+
+  <ion-card>
+    <div>
+      <img src="{{business.logo}}">
+      <ion-fab right top>
+        <button ion-fab color="blue">
+          <ion-icon name="contact"></ion-icon>
+        </button>
+        <ion-fab-list side="bottom">
+          <button ion-fab>
+            <ion-icon (click)="openWebPage(business.facebook_url)" name="logo-facebook"></ion-icon>
+          </button>
+          <button ion-fab>
+            <ion-icon (click)="openWebPage(business.twitter_url)" name="logo-twitter"></ion-icon>
+          </button>
+          <button ion-fab>
+              <ion-icon (click)="openWebPage(business.linkedin_url)" name="logo-linkedin"></ion-icon>
+            </button>
+          <button (click)="callBusinessNumber(business.phone)"  ion-fab>
+            <ion-icon name="call"></ion-icon>
+          </button>
+          <button (click)="sendBusinessSMS(business.mobile)" ion-fab>
+            <ion-icon name="text"></ion-icon>
+          </button>
+        </ion-fab-list>
+      </ion-fab>
+    </div>
+
+    <button ion-button icon-left clear item-end>
+      <ion-icon name="navigate"></ion-icon>
+      Start
+    </button>
+    
+    <ion-card padding>
+      <p>Adresse : {{business.adresse}}</p><br />
+    </ion-card>
+      <ion-card padding>
+      <p>{{business.description}}</p>
+    </ion-card>
+    
+    <ion-item>
+      <h2>Horaire d'ouverture</h2>
+      <p>
+        Lundi : {{business.monday_start}}-{{business.monday_end}}
+        <br /> Mardi : {{business.tuesday_start}}-{{business.tuesday_end }}
+        <br /> Mercredi: {{business.wednesday_start}}-{{business.wednesday_end}}
+        <br /> Jeudi : {{business.thursday_start}}-{{business.thursday_end}}
+        <br /> Vendredi: {{business.friday_start}}-{{business.friday_end}}
+        <br /> Samedi : {{business.saturday_start}}-{{business.saturday_end}}
+        <br /> Dimanche: {{business.sunday_start}}-{{business.sunday_end}}
+        <br />
+      </p>
+    </ion-item>
+
+    <ion-item>
+      <span item-left>18 min</span>
+      <span item-left>(2.6 mi)</span>
+    </ion-item>
+
+  </ion-card>
+
+</ion-content>

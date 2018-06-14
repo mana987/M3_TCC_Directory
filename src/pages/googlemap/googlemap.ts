@@ -52,7 +52,6 @@ export class GoogleMapPage {
         let marker = new google.maps.Marker({
           position: latLng,
           map: map,
-          draggable: true,
           animation: google.maps.Animation.DROP,
           title: 'Hello World!'
         });
@@ -71,8 +70,6 @@ export class GoogleMapPage {
     } else {
       marker.setAnimation(google.maps.Animation.BOUNCE);
     }
-
-
   }
 }
 

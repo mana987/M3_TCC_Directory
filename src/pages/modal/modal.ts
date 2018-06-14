@@ -98,16 +98,17 @@ export class ModalPage {
   //     location: 'default'
   //   })
   //     .then((db: SQLiteObject) => {
-  //       db.executeSql('UPDATE favorite SET fav = 1 WHERE code =' + code, {})
-  //         .then((data) => {
-  //           const browser = this.iab.create('http://tcc.1click.pf/museum/index.php?mat=JQF1GZHZLK&oeuvre='+ code, '_blank');
-  //           browser.on('exit').subscribe(event => {
-  //             console.log('browser exit', data)
-  //             this.navCtrl.setRoot(TabsPage);
-  //           });
+  //       db.executeSql('UPDATE favorite SET fav = 1 WHERE code =' event, {})
+  //         .then((data) => {          
+  //           if(){
+  // 
+  // }else{
+
+  // }
   //         });
   //     });
   // }
+
   // Close Modal
 
   closeModal() {

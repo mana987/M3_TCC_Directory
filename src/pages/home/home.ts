@@ -21,7 +21,9 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
 })
 export class HomePage {
 
+  add:string;
   filter: Array<string>;
+  visible: boolean;
   value: string;
   items = [];
   skills: OneClickApiSkills = new OneClickApiSkills();
@@ -35,7 +37,7 @@ export class HomePage {
   totalData = 0;
   totalPage = 0;
 
-  constructor(public navCtrl: NavController, private platform: Platform, private OCAS: oneClickApiService, public modalCtrl: ModalController, public alertCtrl: AlertController, private callNumber: CallNumber, private navParams: NavParams, private iab: InAppBrowser,private toast: Toast) {
+  constructor(public navCtrl: NavController, private platform: Platform, private OCAS: oneClickApiService, public modalCtrl: ModalController, public alertCtrl: AlertController, private callNumber: CallNumber, private navParams: NavParams, private iab: InAppBrowser, private toast: Toast) {
     platform.ready()
       .then(() => {
         this.getBusinesses();
@@ -100,23 +102,35 @@ export class HomePage {
     modal.present();
   }
 
-  starFav(){
-    
+  starFav(event) {
+    console.log(event)
+    this.visible = !this.visible;
+    this.toastMessage();
   }
-  toastMessage (){
-    this.toast.show(`Ajouté aux favoris`, '1000', 'center')
-    .subscribe(
-      toast => {
-        console.log(toast);
-      }
-    );
+
+  toastMessage() {
+    if (this.visible) {
+      this.toast.show(`Ajouté aux favoris`, '1000', 'center')
+        .subscribe(
+          toast => {
+            console.log(toast);
+          }
+        );
+    }else{
+      this.toast.show(`Supprimé des favoris`, '1000', 'center')
+        .subscribe(
+          toast => {
+            console.log(toast);
+          }
+        );
+    }
+
   }
   // Select Value from Skills
 
   showSelectValue(value) {
-    let test = value[0];
-    console.log("test = ", test);
-    if (test) {
+
+    if (value) {
       console.log("value = ", value);
       this.businesses = [];
       console.info("Selected:", value);
@@ -136,7 +150,7 @@ export class HomePage {
           },
       );
     } else {
-      this.OCAS.getBusinesses(this.page);
+      this.getBusinesses();
       console.log("else");
     }
   }

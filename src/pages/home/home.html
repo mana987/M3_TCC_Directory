@@ -21,8 +21,8 @@
         <h5>{{business.name}}</h5>
         <ion-badge color="light" *ngFor="let skill of business.skills">{{ skill.name }}</ion-badge>
         <button ion-button clear item-end (click)="openModal(business.id)">Voir</button>
-        <button ion-button clear item-end (click)="toastMessage ()">
-          <ion-icon name="star" [isActive]="false"></ion-icon>
+        <button ion-button clear item-end (click)="starFav(event)">
+          <ion-icon name="star" [isActive]="visible"></ion-icon>
         </button>
       </ion-item>
 

@@ -24,18 +24,18 @@
         </button>
         <ion-fab-list side="bottom">
           <button ion-fab>
-            <ion-icon name="logo-facebook"></ion-icon>
+            <ion-icon (click)="openWebPage(business.facebook_url)" name="logo-facebook"></ion-icon>
           </button>
           <button ion-fab>
-            <ion-icon name="logo-twitter"></ion-icon>
+            <ion-icon (click)="openWebPage(business.twitter_url)" name="logo-twitter"></ion-icon>
           </button>
           <button ion-fab>
-              <ion-icon name="logo-linkedin"></ion-icon>
+              <ion-icon (click)="openWebPage(business.linkedin_url)" name="logo-linkedin"></ion-icon>
             </button>
-          <button (click)="callBusinessNumber()"  ion-fab>
+          <button (click)="callBusinessNumber(business.phone)"  ion-fab>
             <ion-icon name="call"></ion-icon>
           </button>
-          <button ion-fab>
+          <button (click)="sendBusinessSMS(business.mobile)" ion-fab>
             <ion-icon name="text"></ion-icon>
           </button>
         </ion-fab-list>
@@ -46,12 +46,14 @@
       <ion-icon name="navigate"></ion-icon>
       Start
     </button>
-    <ion-item>
-      <h2></h2>
-      <p>{{business.adresse}}</p><br />
+    
+    <ion-card padding>
+      <p>Adresse : {{business.adresse}}</p><br />
+    </ion-card>
+      <ion-card padding>
       <p>{{business.description}}</p>
-    </ion-item>
-
+    </ion-card>
+    
     <ion-item>
       <h2>Horaire d'ouverture</h2>
       <p>

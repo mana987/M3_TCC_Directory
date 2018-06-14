@@ -3,7 +3,7 @@
     <ion-title>Entreprises</ion-title>
     <ion-item>
       <ion-label>Filtre</ion-label>
-      <ion-select [(ngModel)]="filter" multiple="true" (ionChange)="showSelectValue(filter)">
+      <ion-select [(ngModel)]="filter" multiple="true" (ionChange)="showSelectValue(filter)" (ionCancel)="getBusinesses()">
         <ion-option value="{{skill.id}}" *ngFor="let skill of skills.data">{{skill.name}}</ion-option>
       </ion-select>
     </ion-item>
@@ -19,11 +19,10 @@
           <img src="{{business.logo}}">
         </ion-thumbnail>
         <h5>{{business.name}}</h5>
-        <!-- <p>{{skill.name}}</p> -->
-        
+        <ion-badge color="light" *ngFor="let skill of business.skills">{{ skill.name }}</ion-badge>
         <button ion-button clear item-end (click)="openModal(business.id)">Voir</button>
-        <button ion-button item-end>
-          <ion-icon name="star"></ion-icon>
+        <button ion-button clear item-end (click)="toastMessage ()">
+          <ion-icon name="star" [isActive]="false"></ion-icon>
         </button>
       </ion-item>
 

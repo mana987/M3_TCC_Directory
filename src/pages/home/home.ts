@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, Platform, AlertController, NavParams } from 'ionic-angular';
 import { ModalController } from 'ionic-angular';
 import { ModalPage } from '../modal/modal';
+import { Toast } from '@ionic-native/toast';
 
 
 // API
@@ -12,6 +13,7 @@ import { OneClickApiGlobalBusiness } from '../models/oneClickApi-global-business
 import { OneClickApiBusinesses } from '../models/oneClickApi-businesses.model'
 import { OneClickGlobalApiSkill } from '../models/oneClickAPi-global-skill.model'
 import { CallNumber } from '@ionic-native/call-number';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 @Component({
   selector: 'page-home',
@@ -20,6 +22,7 @@ import { CallNumber } from '@ionic-native/call-number';
 export class HomePage {
 
   filter: Array<string>;
+  value: string;
   items = [];
   skills: OneClickApiSkills = new OneClickApiSkills();
   globalBusiness: OneClickApiGlobalBusiness = new OneClickApiGlobalBusiness();
@@ -32,7 +35,7 @@ export class HomePage {
   totalData = 0;
   totalPage = 0;
 
-  constructor(public navCtrl: NavController, private platform: Platform, private OCAS: oneClickApiService, public modalCtrl: ModalController, public alertCtrl: AlertController, private callNumber: CallNumber, private navParams: NavParams) {
+  constructor(public navCtrl: NavController, private platform: Platform, private OCAS: oneClickApiService, public modalCtrl: ModalController, public alertCtrl: AlertController, private callNumber: CallNumber, private navParams: NavParams, private iab: InAppBrowser,private toast: Toast) {
     platform.ready()
       .then(() => {
         this.getBusinesses();
@@ -97,10 +100,44 @@ export class HomePage {
     modal.present();
   }
 
+  starFav(){
+    
+  }
+  toastMessage (){
+    this.toast.show(`Ajouté aux favoris`, '1000', 'center')
+    .subscribe(
+      toast => {
+        console.log(toast);
+      }
+    );
+  }
   // Select Value from Skills
 
   showSelectValue(value) {
-    console.info("Selected:", value);
-
+    let test = value[0];
+    console.log("test = ", test);
+    if (test) {
+      console.log("value = ", value);
+      this.businesses = [];
+      console.info("Selected:", value);
+      this.OCAS.postSkills(value)
+        .subscribe(
+          data => {
+            console.log(data)
+            for (let i = 0; i < data.length; i++) {
+              if (this.businesses.indexOf(data[i]) == -1) {
+                this.businesses.push(data[i]);
+              }
+            }
+            console.log(this.businesses)
+          },
+          error => {
+            console.log(error); // Error if any
+          },
+      );
+    } else {
+      this.OCAS.getBusinesses(this.page);
+      console.log("else");
+    }
   }
 }

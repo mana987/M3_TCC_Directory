@@ -19,6 +19,7 @@ import { SQLite, SQLiteObject } from '@ionic-native/sqlite';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { SMS } from '@ionic-native/sms';
 import { CallNumber } from '@ionic-native/call-number';
+import { Toast } from '@ionic-native/toast';
 
 
 @NgModule({
@@ -48,6 +49,7 @@ import { CallNumber } from '@ionic-native/call-number';
     InAppBrowser,
     SMS,
     CallNumber,
+    Toast,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

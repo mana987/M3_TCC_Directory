@@ -19,15 +19,16 @@ export class oneClickApiService {
 
     private businessesUrl = 'http://tccdirectory.1click.pf/api/businesses';
     private baseUrl: string = 'http://tccdirectory.1click.pf/api/';
-    data : Observable<any>;
+    data: Observable<any>;
     result: any[];
+    skillID: string;
 
     constructor(private http: Http) {
     }
 
     // Get all businesses
 
-    getBusinesses(page): Observable <string[]> {
+    getBusinesses(page): Observable<string[]> {
         return this.http.get(this.businessesUrl + "?page=" + page)
             .map(this.extractData)
             .catch(this.handleError);
@@ -85,17 +86,12 @@ export class oneClickApiService {
     //         .catch(error => console.log('Une erreur est survenue getSkill ' + error))
     // }
 
-    public postSkills() {
-        const url = `${this.baseUrl}search/{"skills":"1"}`;
-        let postData = new FormData();
-        this.data = this.http.post(url, postData);
-        this.data.subscribe(data =>{
-            this.result = data
-            console.log('data')
-        });
-            
+    public postSkills(skillID): Observable<any> {
+
+        const url = `${this.baseUrl}search`;
+        let postData = { "skills": skillID.join(",") };
+        return this.http.post(url, postData)
+        .map((response: Response) => response.json());
     }
-
-
 }
 

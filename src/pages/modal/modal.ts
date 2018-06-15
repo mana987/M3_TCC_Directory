@@ -50,6 +50,31 @@ export class ModalPage {
       })
   }
 
+  ionViewWillEnter() {
+    this.loadPage();
+    this.initDb();
+  }
+
+  loadPage() {
+    this.sqlite.create({
+      name: 'data.db',
+      location: 'default'
+    })
+      .then((db: SQLiteObject) => {
+        console.log('this*;eventDev', this.navParams.get("businessId"));
+        this.db = db;
+        this.db.executeSql('SELECT * FROM favorite WHERE idev = ?', [this.navParams.get("businessId")])
+          .then((data) => {
+            console.log(JSON.stringify(data), 'maachheee')
+            if (data.rows.length == 1) {
+              this.visible = true;
+            } else {
+              this.visible = false;
+            }
+          })
+      })
+  }
+
   initDb() {
 
     this.sqlite.create({
@@ -67,20 +92,6 @@ export class ModalPage {
           .catch((e) => console.log('error', e));
       })
       .catch(e => console.log('yolo error', e));
-  }
-
-  // Update Status favorite
-
-  upDateStatus() {
-
-    // this.sqlite.create({
-    //   name: 'data.db',
-    //   location: 'default'
-    // })
-    // this.db.executeSql('UPDATE favorite SET statusFav = 1 WHERE idev = {})
-    //   .then() => {
-
-    //   });
   }
 
   // send position to google
@@ -111,10 +122,7 @@ export class ModalPage {
 
   destinationMap(lat, lng, logo) {
     console.log(lat, lng);
-    // this.latitude = lat;
-    // this.longitude = lng;
-    // this.logo = logo;
-    this.navCtrl.push(GooglemapPage, {'lat':lat, 'lng':lng, 'logo':logo});
+    this.navCtrl.push(GooglemapPage, { 'lat': lat, 'lng': lng, 'logo': logo });
   }
 
   // Active Stars
@@ -123,6 +131,11 @@ export class ModalPage {
     console.log(event)
     this.eventDev = event;
     this.nameDev = namePro;
+    if (event) {
+
+    } else {
+
+    }
     this.visible = !this.visible;
     this.toastMessage();
     this.initDb();
@@ -144,9 +157,7 @@ export class ModalPage {
           toast => {
             console.log('supp fav', toast);
           }
-
         );
-      // this.deleteDb(id);
     }
   }
 
@@ -167,8 +178,6 @@ export class ModalPage {
       })
       .catch(e => console.log('yolo error', e));
   }
-
-
   // Close Modal
 
   closeModal() {
@@ -177,7 +186,4 @@ export class ModalPage {
   ionViewWillLoad() {
 
   }
-
-
-
 }

@@ -12,6 +12,8 @@ import { OneClickApiSkills } from '../models/oneClickApi-skills.model';
 import { OneClickApiGlobalBusiness } from '../models/oneClickApi-global-business.model';
 import { OneClickGlobalApiSkill } from '../models/oneClickAPi-global-skill.model'
 
+import { Toast } from '@ionic-native/toast';
+
 
 @Component({
   selector: 'page-home',
@@ -34,8 +36,9 @@ export class HomePage {
   perPage = 0;
   totalData = 0;
   totalPage = 0;
+  businessTmp= [];
 
-  constructor(public navCtrl: NavController, private platform: Platform, private OCAS: oneClickApiService, public modalCtrl: ModalController, public alertCtrl: AlertController) {
+  constructor(public navCtrl: NavController, private platform: Platform, private OCAS: oneClickApiService, public modalCtrl: ModalController, public alertCtrl: AlertController, private toast: Toast) {
     platform.ready()
       .then(() => {
         this.getBusinesses();
@@ -69,7 +72,17 @@ export class HomePage {
 
   getAbus(id) {
     this.OCAS.getAbus(id);
-    console.log('id', id)
+    console.log('id', id);
+    this.toastMessage();
+  }
+
+  toastMessage() {
+    this.toast.show(`Signalement envoyé`, '5000', 'center')
+      .subscribe(
+        toast => {
+          console.log('add fav', toast);
+        }
+      )
   }
   // Inifinite scroll
 
@@ -110,20 +123,26 @@ export class HomePage {
 
     let list = value[0];
 
+    this.businesses = [];
+    
+    this.businessTmp = [];
     if (list) {
       console.log("value = ", value);
-      this.businesses = value;
-      console.info("Selected:", value);
       this.OCAS.postSkills(value)
         .subscribe(
           data => {
-            console.log(data)
+            console.log(data);
+            let y = 0;
             for (let i = 0; i < data.length; i++) {
-              if (this.businesses.indexOf(data[i]) == -1) {
+
+              if (this.businessTmp.indexOf(data[i].id) == -1) {y++;
                 this.businesses.push(data[i]);
+                this.businessTmp.push(data[i].id);
+                console.log(y);
+
               }
             }
-            console.log(this.businesses)
+            console.log(this.businesses);
           },
           error => {
             console.log(error);

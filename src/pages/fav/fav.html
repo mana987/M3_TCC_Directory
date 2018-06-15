@@ -1,12 +1,17 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>favoris</ion-title>
+    <ion-title>Favoris</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
-
+<ion-content>
+  <ion-list *ngFor="let fav of favorite">
+    <ion-item>
+        <button ion-button clear item-end (click)="openModal(fav.id)">Voir</button>
+        <h5>{{fav.name}}</h5>
+    </ion-item>
+  </ion-list>
 </ion-content>

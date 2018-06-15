@@ -42,11 +42,11 @@
       </ion-fab>
     </div>
 
-    <button ion-button icon-left clear item-start>
+    <button ion-button icon-left clear item-start (click)=" destinationMap(business.latitude,business.longitude,business.logo,business.name)">
       <ion-icon name="navigate"></ion-icon>
       Aller !
     </button>
-    <button ion-button clear item-end (click)="starFav(business.id)">
+    <button ion-button clear item-end (click)="starFav(business.id,business.name)">
       <ion-icon name="star" [isActive]="visible"></ion-icon>
     </button>
 

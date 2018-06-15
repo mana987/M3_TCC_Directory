@@ -15,14 +15,18 @@ export class WelcomePage {
 
   database: SQLiteObject;
   progress = 0;
+  id: number;
+  name: string;
 
 
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private platform: Platform, private sqlite:SQLite) {
     this.platform.ready().then(() => {
-      this.redirectToTabs();
-      this.navParams.get('event');
-    })
+      this.initDb();
+      // this.redirectToTabs();
+      this.id = this.navParams.get('event');
+      this.name = this.navParams.get('name');
+    });
   }
 
   initDb() {
@@ -34,7 +38,7 @@ export class WelcomePage {
       .then((db: SQLiteObject) => {
         this.database = db;
         this.createFavoriteTable();
-        // this.dropOeuvresTable();
+        // this.dropFavoriteTable();
       })
       .catch(e => console.log(e));
   }
@@ -43,15 +47,10 @@ export class WelcomePage {
 
   createFavoriteTable() {
 
-    this.database.executeSql('CREATE TABLE IF NOT EXISTS favorite (id INTEGER PRIMARY KEY, name TEXT, fav INTEGER )', {})
+    this.database.executeSql('CREATE TABLE IF NOT EXISTS favorite (id INTEGER PRIMARY KEY AUTOINCREMENT, idev INTEGER UNIQUE, name TEXT, statusFav INTEGER)', {})
       .then(() => {
-        this.checkFavoriteExists()
-          .then((data) => {
-            // let totalOeuvres = data;
-            // console.log('total oeuvres', data);
-            // if (totalOeuvres == 21) this.redirectToTabs();
-            // else this.insertOeuvresDatas();
-          })
+        console.log('table créé')
+        this.redirectToTabs();
       })
       .catch(e => console.log(e));
 
@@ -59,34 +58,29 @@ export class WelcomePage {
 
   // Drop Table
   
-  // dropFavoriteTable(): any {
-  //   this.database.executeSql('DROP TABLE Favorite', {})
-  //     .then(() => {
-  //       console.log('table oeuvres dropped')
-  //     })
-  //     .catch(() => {
+  dropFavoriteTable(): any {
+    this.database.executeSql('DROP TABLE Favorite', {})
+      .then(() => {
+        console.log('table oeuvres dropped')
+      })
+      .catch(() => {
 
+      })
+  }
+
+  // checkFavoriteExists(): any {
+
+  //   return this.database.executeSql('SELECT * FROM favorite', {})
+  //     .then((data) => {
+  //       return data.rows.length;
   //     })
+  //     .catch(e => console.log(e));
   // }
 
-  checkFavoriteExists(): any {
+  // insertFavoriteDatas(name) {
 
-    return this.database.executeSql('SELECT * FROM favorite', {})
-      .then((data) => {
-        return data.rows.length;
-      })
-      .catch(e => console.log(e));
-  }
-
-  insertFavoriteDatas() {
-
-    let inserts ="INSERT INTO `favorite` VALUES ('event')";
-    this.database.executeSql(inserts, {})
-      .then(() => {
-        this.redirectToTabs()
-      })
-      .catch((e) => console.log('error', e));
-  }
+    
+  // }
 
   redirectToTabs() {
     let limit = 4;

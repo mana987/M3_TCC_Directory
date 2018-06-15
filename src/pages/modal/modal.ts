@@ -11,6 +11,7 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { Toast } from '@ionic-native/toast';
 import { WelcomePage } from '../welcome/welcome';
 import { SQLite, SQLiteObject } from '@ionic-native/sqlite';
+import { GooglemapPage } from '../googlemap/googlemap';
 
 @IonicPage()
 @Component({
@@ -24,7 +25,16 @@ export class ModalPage {
   SMS: string;
   url: string;
   visible: boolean;
+  name: string;
   db: SQLiteObject;
+  position = [];
+  eventDev: number;
+  nameDev: string;
+  latitude: number;
+  longitude: number;
+  logo: string;
+
+
 
   constructor(private navParams: NavParams, private view: ViewController, private platform: Platform, private OCAS: oneClickApiService, private callNumber: CallNumber, private sms: SMS, private iab: InAppBrowser, private toast: Toast, public navCtrl: NavController, private sqlite: SQLite) {
     platform.ready()
@@ -38,6 +48,45 @@ export class ModalPage {
           });
 
       })
+  }
+
+  initDb() {
+
+    this.sqlite.create({
+      name: 'data.db',
+      location: 'default'
+    })
+      .then((db: SQLiteObject) => {
+        this.db = db;
+        let inserts = "INSERT INTO `favorite` (idev, name, statusFav) VALUES (?, ?, 0)";
+        this.db.executeSql(inserts, [this.eventDev, this.nameDev])
+
+          .then(() => {
+            console.log('insert done')
+          })
+          .catch((e) => console.log('error', e));
+      })
+      .catch(e => console.log('yolo error', e));
+  }
+
+  // Update Status favorite
+
+  upDateStatus() {
+
+    // this.sqlite.create({
+    //   name: 'data.db',
+    //   location: 'default'
+    // })
+    // this.db.executeSql('UPDATE favorite SET statusFav = 1 WHERE idev = {})
+    //   .then() => {
+
+    //   });
+  }
+
+  // send position to google
+
+  GoGoogle(position) {
+    this.navCtrl.push("GooglemapPage", position)
   }
 
   // Call Phone Number
@@ -60,13 +109,23 @@ export class ModalPage {
     this.iab.create(url, '_self')
   }
 
+  destinationMap(lat, lng, logo) {
+    console.log(lat, lng);
+    // this.latitude = lat;
+    // this.longitude = lng;
+    // this.logo = logo;
+    this.navCtrl.push(GooglemapPage, {'lat':lat, 'lng':lng, 'logo':logo});
+  }
+
   // Active Stars
 
-  starFav(event) {
+  starFav(event, namePro) {
     console.log(event)
-    this.navCtrl.push(WelcomePage, event)
+    this.eventDev = event;
+    this.nameDev = namePro;
     this.visible = !this.visible;
     this.toastMessage();
+    this.initDb();
   }
 
   // Message toast
@@ -76,38 +135,39 @@ export class ModalPage {
       this.toast.show(`Ajouté aux favoris`, '1000', 'center')
         .subscribe(
           toast => {
-            console.log(toast);
+            console.log('add fav', toast);
           }
         );
     } else {
       this.toast.show(`Supprimé des favoris`, '1000', 'center')
         .subscribe(
           toast => {
-            console.log(toast);
+            console.log('supp fav', toast);
           }
+
         );
+      // this.deleteDb(id);
     }
   }
 
-  // Update Status favorite
+  deleteDb(id) {
 
-  // upDateStatus() {
+    this.sqlite.create({
+      name: 'data.db',
+      location: 'default'
+    })
+      .then((db: SQLiteObject) => {
+        let deletesql = "DELETE FROM `favoris` WHERE 'idev'=" + id;
+        db.executeSql(deletesql, {})
 
-  //   this.sqlite.create({
-  //     name: 'data.db',
-  //     location: 'default'
-  //   })
-  //     .then((db: SQLiteObject) => {
-  //       db.executeSql('UPDATE favorite SET fav = 1 WHERE code =' event, {})
-  //         .then((data) => {          
-  //           if(){
-  // 
-  // }else{
+          .then(() => {
+            console.log('delete done')
+          })
+          .catch((e) => console.log('error', e));
+      })
+      .catch(e => console.log('yolo error', e));
+  }
 
-  // }
-  //         });
-  //     });
-  // }
 
   // Close Modal
 

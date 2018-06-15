@@ -1,3 +1,3 @@
 export class OneClickApiAbus {
-    sucess: number;
+    success: number;
 } 
